@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/items": {
+      "name": "/items",
+      "lambdaFunction": "assettablemakerv2a7afbd9e",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

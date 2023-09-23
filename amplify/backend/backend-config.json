@@ -1,0 +1,43 @@
+{
+  "api": {
+    "apiasset": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "assettablemakerv2a7afbd9e"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "assettablemakerv2a7afbd9e": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_assettablemakerv2a7afbd9e_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "assettablemakerv2a7afbd9e"
+        }
+      ]
+    },
+    "AMPLIFY_function_assettablemakerv2a7afbd9e_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "assettablemakerv2a7afbd9e"
+        }
+      ]
+    }
+  }
+}
