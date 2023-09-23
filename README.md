@@ -1,0 +1,1 @@
+# amplify-asset-table-maker-v2
