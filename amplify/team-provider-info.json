@@ -20,6 +20,9 @@
       },
       "api": {
         "apiasset": {}
+      },
+      "auth": {
+        "assettablemakerv2567af47c": {}
       }
     }
   }
