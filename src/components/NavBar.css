@@ -1,0 +1,18 @@
+.NavBarDiv {
+    background-color: mediumslateblue;
+    width: 200px;
+    height: auto;
+}
+
+.NavBarDiv ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.NavBarDiv li {
+    margin: 0 auto;
+}
+
+.NavBarDiv li:hover {
+    background-color: gray;
+}
