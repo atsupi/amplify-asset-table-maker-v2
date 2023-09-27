@@ -72,6 +72,7 @@
       "service": "Lambda"
     }
   },
+  "hosting": {},
   "parameters": {
     "AMPLIFY_function_assettablemakerv2a7afbd9e_deploymentBucketName": {
       "usedBy": [
