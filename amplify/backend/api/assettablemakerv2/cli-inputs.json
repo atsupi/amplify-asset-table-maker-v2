@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "assettablemakerv2",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authassettablemakerv2567af47c"
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": []
+  }
+}

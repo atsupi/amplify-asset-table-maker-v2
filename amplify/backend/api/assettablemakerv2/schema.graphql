@@ -1,0 +1,34 @@
+type AssetTable 
+  @model (
+    timestamps: null
+  )
+  @auth(rules: [
+    {allow: owner, ownerField:"owner", provider: userPools, operations:[read, create, update, delete]}
+    {allow: private, provider: userPools, operations:[read, create]}
+  ])
+{
+  id: ID!
+  primaryKey: String!
+  date: String!
+  reportBy: String!
+  storage: String!
+  facility: String!
+  assetType: String!
+  type: String!
+}
+
+type Option
+  @model (
+    timestamps: null
+  )
+  @auth(rules: [
+    {allow: owner, ownerField:"owner", provider: userPools, operations:[read, create, update, delete]}
+    {allow: private, provider: userPools, operations:[read, create]}
+  ])
+{
+  id: ID!
+  reportBy: String!
+  storage: String!
+  facility: String!
+  assetType: String!
+}

@@ -1,0 +1,21 @@
+.Container {
+    display: block;
+    padding: 0 10px 5px 5px;
+}
+
+form label {
+    display: flex;
+    width: 80%;
+}
+
+form label input {
+    width: 190px;
+    margin: 2px 20px 0 auto;
+}
+
+.submitButton {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px 20px;
+    margin: 20px;
+}

@@ -1,15 +1,17 @@
 .NavBarDiv {
     background-color: mediumslateblue;
-    width: 200px;
-    height: auto;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 .NavBarDiv ul {
-    list-style-type: none;
-    padding: 0;
+    list-style: none;
+    padding-inline-start: 0;
 }
 
 .NavBarDiv li {
+    padding: 5px;
     margin: 0 auto;
 }
 

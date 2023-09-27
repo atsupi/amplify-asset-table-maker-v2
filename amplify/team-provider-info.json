@@ -19,7 +19,8 @@
         }
       },
       "api": {
-        "apiasset": {}
+        "apiasset": {},
+        "assettablemakerv2": {}
       },
       "auth": {
         "assettablemakerv2567af47c": {}

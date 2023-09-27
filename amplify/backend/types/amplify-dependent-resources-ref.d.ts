@@ -4,6 +4,10 @@ export type AmplifyDependentResourcesAttributes = {
       "ApiId": "string",
       "ApiName": "string",
       "RootUrl": "string"
+    },
+    "assettablemakerv2": {
+      "GraphQLAPIEndpointOutput": "string",
+      "GraphQLAPIIdOutput": "string"
     }
   },
   "auth": {

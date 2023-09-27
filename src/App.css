@@ -1,13 +1,12 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
 .App-header {
   display: flex;
-  width: 100vh;
+  width: 100vw;
   justify-content: space-between;
   align-content: center;
   background-color: dimgray;
@@ -21,7 +20,16 @@
 
 .App-main {
   display: flex;
-  width: 100vh;
-  justify-content: center;
-  align-content: center;
+  width: 100vw;
+}
+
+.NavBarContent {
+  background-color: mediumslateblue;
+  width: 100px;
+  min-width: 100px; 
+}
+
+.MainContent {
+  flex: 1;
+  margin: 0 auto;
 }

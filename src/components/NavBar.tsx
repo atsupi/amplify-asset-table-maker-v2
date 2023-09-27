@@ -12,7 +12,7 @@ export default function NavBar() {
           }
             to="/"
           >
-            Asset List
+            Asset
           </NavLink>
         </li>
         <li>
@@ -22,7 +22,7 @@ export default function NavBar() {
             }
             to="/upload"
           >
-            Upload Asset
+            Upload
           </NavLink>
         </li>
         <li>
