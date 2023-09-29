@@ -2,6 +2,8 @@ import { API, graphqlOperation } from "aws-amplify";
 import { getOption } from "./graphql/queries.ts";
 import { updateOption } from "./graphql/mutations.ts";
 import { createOption } from "./graphql/mutations.ts";
+import { listUploaders } from "./graphql/queries.ts";
+import { createUploader } from "./graphql/mutations.ts";
 
 const apiName = "apiasset";
 const path = "/items";
@@ -9,6 +11,16 @@ const path = "/items";
 async function getApi() {
     const res = await API.get(apiName, path, {});
     console.log("getApi", res);
+}
+
+export interface PostApiParams {
+    data: any,
+    option: any,
+}
+
+async function postApi(params: PostApiParams) {
+    const res = await API.post(apiName, path, params);
+    console.log("postApi", res);
 }
 
 export interface OptionDataParams {
@@ -19,8 +31,18 @@ export interface OptionDataParams {
     assetType: string;
 }
 
+export interface UploaderDataParams {
+    id: string;
+    reportBy: string;
+    code: string;
+}
+
 type getOptionDataRes = {
     data: { getOption: OptionDataParams };
+}
+
+type UploaderDataRes = {
+    data: { listUploaders: UploaderDataParams };
 }
 
 async function getOptionData(key: string) {
@@ -55,4 +77,24 @@ async function createOptionData(params: OptionDataParams) {
     }
 }
 
-export { getApi, getOptionData, setOptionData, createOptionData };
+async function createCode(params: UploaderDataParams) {
+    try {
+        await API.graphql(
+            graphqlOperation(createUploader, { input: params })
+        );
+    } catch (err) {
+        console.log("Error: createCode", err);
+    }
+}
+
+async function queryUploaders() {
+    try {
+        const uploaders: Promise<UploaderDataRes> = <Promise<UploaderDataRes>>await API.graphql(graphqlOperation(listUploaders));
+        if (uploaders === undefined) return undefined;
+        return (await uploaders).data.listUploaders;
+    } catch (err) {
+        console.log("Error: queryUploaders", err);
+    }
+}
+
+export { getApi, postApi, getOptionData, setOptionData, createOptionData, createCode, queryUploaders  };
