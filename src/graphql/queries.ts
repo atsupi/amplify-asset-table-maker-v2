@@ -41,6 +41,36 @@ export const listAssetTables = /* GraphQL */ `
     }
   }
 `;
+export const getUploader = /* GraphQL */ `
+  query GetUploader($id: ID!) {
+    getUploader(id: $id) {
+      id
+      reportBy
+      code
+      owner
+      __typename
+    }
+  }
+`;
+export const listUploaders = /* GraphQL */ `
+  query ListUploaders(
+    $filter: ModelUploaderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUploaders(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        reportBy
+        code
+        owner
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const getOption = /* GraphQL */ `
   query GetOption($id: ID!) {
     getOption(id: $id) {

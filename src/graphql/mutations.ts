@@ -58,6 +58,48 @@ export const deleteAssetTable = /* GraphQL */ `
     }
   }
 `;
+export const createUploader = /* GraphQL */ `
+  mutation CreateUploader(
+    $input: CreateUploaderInput!
+    $condition: ModelUploaderConditionInput
+  ) {
+    createUploader(input: $input, condition: $condition) {
+      id
+      reportBy
+      code
+      owner
+      __typename
+    }
+  }
+`;
+export const updateUploader = /* GraphQL */ `
+  mutation UpdateUploader(
+    $input: UpdateUploaderInput!
+    $condition: ModelUploaderConditionInput
+  ) {
+    updateUploader(input: $input, condition: $condition) {
+      id
+      reportBy
+      code
+      owner
+      __typename
+    }
+  }
+`;
+export const deleteUploader = /* GraphQL */ `
+  mutation DeleteUploader(
+    $input: DeleteUploaderInput!
+    $condition: ModelUploaderConditionInput
+  ) {
+    deleteUploader(input: $input, condition: $condition) {
+      id
+      reportBy
+      code
+      owner
+      __typename
+    }
+  }
+`;
 export const createOption = /* GraphQL */ `
   mutation CreateOption(
     $input: CreateOptionInput!
