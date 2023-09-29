@@ -7,17 +7,33 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ListPage from "./pages/ListPage";
 import UploaderPage from "./pages/UploaderPage";
 import SettingPage from "./pages/SettingPage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ReaderPage } from "./pages/ReaderPage";
+import { Auth } from "aws-amplify";
 
 function App() {
   const [username, setUsername] = useState("");
   getApi();
 
+  async function currentAuthenticatedUser() {
+    try {
+      const user = await Auth.currentAuthenticatedUser({
+        bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+      });
+      setUsername(user);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    currentAuthenticatedUser();
+  }, []);
+
   return (
-    <Authenticator>
-      {({ signOut, user }) => {
-        setUsername(user?.username || "");
-        return (
+    <>
+      <Authenticator>
+        {({ signOut, user }) => (
           <>
             <header className="App-header">
               <p>Hello, {user?.username}</p>
@@ -31,6 +47,10 @@ function App() {
                 <div className="MainContent">
                   <Routes>
                     <Route index path="/" element={<ListPage />} />
+                    <Route
+                      path="/reader"
+                      element={<ReaderPage username={username} />}
+                    />
                     <Route path="/upload" element={<UploaderPage />} />
                     <Route
                       path="/setting"
@@ -41,9 +61,9 @@ function App() {
               </BrowserRouter>
             </main>
           </>
-        );
-      }}
-    </Authenticator>
+        )}
+      </Authenticator>
+    </>
   );
 }
 

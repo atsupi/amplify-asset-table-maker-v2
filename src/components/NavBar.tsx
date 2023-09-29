@@ -20,6 +20,16 @@ export default function NavBar() {
             style={({ isActive }) =>
               isActive ? { color: "white" } : { color: "black" }
             }
+            to="/reader"
+          >
+            Reader
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            style={({ isActive }) =>
+              isActive ? { color: "white" } : { color: "black" }
+            }
             to="/upload"
           >
             Upload
