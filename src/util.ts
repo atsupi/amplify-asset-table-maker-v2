@@ -19,7 +19,11 @@ export interface PostApiParams {
 }
 
 async function postApi(params: PostApiParams) {
-    const res = await API.post(apiName, path, params);
+    const myInit = {
+        body: params,
+        header: {},
+    }
+    const res = await API.post(apiName, path, myInit);
     console.log("postApi", res);
 }
 
@@ -37,12 +41,16 @@ export interface UploaderDataParams {
     code: string;
 }
 
+export interface ListUploaderDataParamas {
+    items: [UploaderDataParams];
+}
+
 type getOptionDataRes = {
     data: { getOption: OptionDataParams };
 }
 
 type UploaderDataRes = {
-    data: { listUploaders: UploaderDataParams };
+    data: { listUploaders: ListUploaderDataParamas };
 }
 
 async function getOptionData(key: string) {
