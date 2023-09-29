@@ -1,9 +1,9 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { getOption } from "./graphql/queries.ts";
-import { updateOption } from "./graphql/mutations.ts";
-import { createOption } from "./graphql/mutations.ts";
-import { listUploaders } from "./graphql/queries.ts";
-import { createUploader } from "./graphql/mutations.ts";
+import { getOption } from "./graphql/queries";
+import { updateOption } from "./graphql/mutations";
+import { createOption } from "./graphql/mutations";
+import { listUploaders } from "./graphql/queries";
+import { createUploader } from "./graphql/mutations";
 
 const apiName = "apiasset";
 const path = "/items";
