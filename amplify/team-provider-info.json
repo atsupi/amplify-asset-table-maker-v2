@@ -1,14 +1,14 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-assettablemakerv2-dev-174704-authRole",
-      "UnauthRoleArn": "arn:aws:iam::074682543290:role/amplify-assettablemakerv2-dev-174704-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::074682543290:role/amplify-assettablemakerv2-dev-174704-authRole",
+      "AuthRoleName": "amplify-assettablemakerv2-dev-24839-authRole",
+      "UnauthRoleArn": "arn:aws:iam::074682543290:role/amplify-assettablemakerv2-dev-24839-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::074682543290:role/amplify-assettablemakerv2-dev-24839-authRole",
       "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-assettablemakerv2-dev-174704-deployment",
-      "UnauthRoleName": "amplify-assettablemakerv2-dev-174704-unauthRole",
-      "StackName": "amplify-assettablemakerv2-dev-174704",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:074682543290:stack/amplify-assettablemakerv2-dev-174704/c0c8d9e0-5ea4-11ee-a978-0649a590e823",
+      "DeploymentBucketName": "amplify-assettablemakerv2-dev-24839-deployment",
+      "UnauthRoleName": "amplify-assettablemakerv2-dev-24839-unauthRole",
+      "StackName": "amplify-assettablemakerv2-dev-24839",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:074682543290:stack/amplify-assettablemakerv2-dev-24839/69094040-5ef0-11ee-80b0-0eeb52f0bfab",
       "AmplifyAppId": "d1cejj31fcs8v9"
     },
     "categories": {
@@ -17,8 +17,8 @@
       },
       "function": {
         "assettablemakerv2a7afbd9e": {
-          "deploymentBucketName": "amplify-assettablemakerv2-dev-174704-deployment",
-          "s3Key": "amplify-builds/assettablemakerv2a7afbd9e-7566426d716d6e6b676a-build.zip"
+          "deploymentBucketName": "amplify-assettablemakerv2-dev-24839-deployment",
+          "s3Key": "amplify-builds/assettablemakerv2a7afbd9e-47726d7573667831496c-build.zip"
         }
       },
       "api": {

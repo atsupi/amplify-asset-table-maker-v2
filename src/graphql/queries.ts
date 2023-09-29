@@ -105,3 +105,30 @@ export const listOptions = /* GraphQL */ `
     }
   }
 `;
+export const uploadersByReportBy = /* GraphQL */ `
+  query UploadersByReportBy(
+    $reportBy: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelUploaderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    uploadersByReportBy(
+      reportBy: $reportBy
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        reportBy
+        code
+        owner
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;

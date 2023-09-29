@@ -68,6 +68,7 @@
   "function": {
     "assettablemakerv2a7afbd9e": {
       "build": true,
+      "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
