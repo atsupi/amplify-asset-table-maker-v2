@@ -46,12 +46,12 @@ function App() {
                 </div>
                 <div className="MainContent">
                   <Routes>
-                    <Route index path="/" element={<ListPage />} />
+                    <Route index path="/" element={<ListPage username={username}/>} />
                     <Route
                       path="/reader"
                       element={<ReaderPage username={username} />}
                     />
-                    <Route path="/upload" element={<UploaderPage />} />
+                    <Route path="/upload" element={<UploaderPage username={username} />} />
                     <Route
                       path="/setting"
                       element={<SettingPage username={username} />}

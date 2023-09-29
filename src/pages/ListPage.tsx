@@ -1,9 +1,16 @@
+import { useEffect, useState } from "react";
 import "./ListPage.css";
 
-export default function ListPage() {
+export default function ListPage(props: any) {
+  const [username, setUsername] = useState("");
+  useEffect(() => {
+    setUsername(props.username);
+  }, []);
+
   return (
     <div className="listPageContainer">
       <p>List Page</p>
+      <p>{username}</p>
     </div>
   );
 }
