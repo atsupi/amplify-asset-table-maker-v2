@@ -1,7 +1,7 @@
 import "./SettingPage.css";
 import { useEffect, useState } from "react";
 import {
-  SetOptionDataParams,
+  OptionDataParams,
   createOptionData,
   getOptionData,
   setOptionData,
@@ -27,14 +27,22 @@ export default function SettingPage(props: any) {
 
   async function fetchSettingData() {
     const data = await getOptionData(key);
-    if (data === undefined) {
-      await createOptionData(key);
+    if (data === undefined || data === null) {
+      const params: OptionDataParams = {
+        id: key,
+        reportBy: props.username,
+        facility: "",
+        storage: "",
+        assetType: "",
+      };
+      await createOptionData(params);
+      setReportBy(props.username);
     }
     return data;
   }
 
   useEffect(() => {
-    fetchSettingData().then((data: SetOptionDataParams | undefined) => {
+    fetchSettingData().then((data: OptionDataParams | undefined) => {
       if (data) {
         setReportBy(data.reportBy || "");
         setFacility(data.facility || "");
@@ -46,7 +54,7 @@ export default function SettingPage(props: any) {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    const param: SetOptionDataParams = {
+    const param: OptionDataParams = {
       id: key,
       reportBy: event.target[0].value,
       storage: event.target[1].value,
@@ -57,7 +65,7 @@ export default function SettingPage(props: any) {
   }
   return (
     <>
-      <div className="Container">
+      <div className="SettingPageContainer">
         <p>Setting Page</p>
         <form onSubmit={handleSubmit}>
           <label>

@@ -13,14 +13,13 @@ import { Auth } from "aws-amplify";
 
 function App() {
   const [username, setUsername] = useState("");
-  getApi();
 
   async function currentAuthenticatedUser() {
     try {
       const user = await Auth.currentAuthenticatedUser({
         bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
       });
-      setUsername(user);
+      setUsername(user.username);
     } catch (err) {
       console.log(err);
     }
@@ -28,6 +27,7 @@ function App() {
 
   useEffect(() => {
     currentAuthenticatedUser();
+    getApi();
   }, []);
 
   return (

@@ -11,7 +11,7 @@ async function getApi() {
     console.log("getApi", res);
 }
 
-export interface SetOptionDataParams {
+export interface OptionDataParams {
     id: string;
     reportBy: string;
     storage: string;
@@ -20,7 +20,7 @@ export interface SetOptionDataParams {
 }
 
 type getOptionDataRes = {
-    data: { getOption: SetOptionDataParams };
+    data: { getOption: OptionDataParams };
 }
 
 async function getOptionData(key: string) {
@@ -35,7 +35,7 @@ async function getOptionData(key: string) {
     }
 }
 
-async function setOptionData(params: SetOptionDataParams) {
+async function setOptionData(params: OptionDataParams) {
     try {
         await API.graphql(
             graphqlOperation(updateOption, { input: params })
@@ -45,10 +45,10 @@ async function setOptionData(params: SetOptionDataParams) {
     }
 }
 
-async function createOptionData(key: string) {
+async function createOptionData(params: OptionDataParams) {
     try {
         await API.graphql(
-            graphqlOperation(createOption, { id: key })
+            graphqlOperation(createOption, { input: params })
         );
     } catch (err) {
         console.log("Error: createOptionData", err);
