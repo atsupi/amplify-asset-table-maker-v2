@@ -17,6 +17,20 @@ type AssetTable
   type: String!
 }
 
+type Uploader
+  @model (
+    timestamps: null
+  )
+  @auth(rules: [
+    {allow: owner, ownerField:"owner", provider: userPools, operations:[read, create, update, delete]}
+    {allow: private, provider: userPools, operations:[read, create]}
+  ])
+{
+  id: ID!
+  reportBy: String! @index
+  code: String!
+}
+
 type Option
   @model (
     timestamps: null
