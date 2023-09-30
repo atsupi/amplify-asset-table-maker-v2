@@ -27,7 +27,7 @@ type Uploader
   ])
 {
   id: ID!
-  reportBy: String! @index
+  reportBy: String!
   code: String!
 }
 
