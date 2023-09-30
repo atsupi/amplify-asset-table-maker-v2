@@ -1,6 +1,12 @@
 import "./UploaderPage.css";
-import { getOptionData, postApi, queryUploaders } from "../util";
+import {
+  ListUploaderDataParamas,
+  getOptionData,
+  postApi,
+  queryUploaders,
+} from "../util";
 import { useEffect, useState } from "react";
+import { UploadListItem } from "../components/UploadListItem";
 
 // interface queryUploadersRes {
 //   data: {items: []}
@@ -8,8 +14,18 @@ import { useEffect, useState } from "react";
 
 export default function UploaderPage(props: any) {
   const [username, setUsername] = useState("");
+  const [items, setItems] = useState<ListUploaderDataParamas>();
+
   useEffect(() => {
+    const data = async () => {
+      const listUploaders = await queryUploaders();
+      if (listUploaders) {
+        setItems(listUploaders);
+      }
+    };
     setUsername(props.username);
+    data();
+    console.log("UploaderPage", items);
   }, []);
 
   const uploadData = async () => {
@@ -28,9 +44,17 @@ export default function UploaderPage(props: any) {
 
   return (
     <>
-      <p>Uploader Page</p>
-      <p>{props?.username}</p>
-      <button onClick={uploadData}>Upload data</button>
+      <button className="UploadButton" onClick={uploadData}>Upload data</button>
+      <table id="uploadListTable">
+        <tbody>
+          <tr>
+            <th>ID</th>
+            <th>Code</th>
+            <th>ReportedBy</th>
+          </tr>
+          <UploadListItem table={items?.items} />
+        </tbody>
+      </table>
     </>
   );
 }

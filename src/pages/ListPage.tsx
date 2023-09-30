@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./ListPage.css";
+import { AssetItem } from "../components/AssetItem";
 
 export default function ListPage(props: any) {
   const [username, setUsername] = useState("");
@@ -9,8 +10,21 @@ export default function ListPage(props: any) {
 
   return (
     <div className="listPageContainer">
-      <p>List Page</p>
-      <p>{username}</p>
+                <table className="listPageTable">
+            <tbody>
+              <tr>
+                <th>Serial#</th>
+                <th>Date</th>
+                <th>ReportedBy</th>
+                <th>Location</th>
+                <th>Storage</th>
+                <th>Asset type</th>
+                <th>PK</th>
+                <th>Link</th>
+              </tr>
+              <AssetItem assettables={props.assettables} deleteitem={props.deleteitem}/>
+            </tbody>
+          </table>
     </div>
   );
 }

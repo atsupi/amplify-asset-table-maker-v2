@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { getOption } from "./graphql/queries";
+import { getOption, listAssetTables } from "./graphql/queries";
 import { updateOption } from "./graphql/mutations";
 import { createOption } from "./graphql/mutations";
 import { listUploaders } from "./graphql/queries";
@@ -25,6 +25,22 @@ async function postApi(params: PostApiParams) {
     }
     const res = await API.post(apiName, path, myInit);
     console.log("postApi", res);
+}
+
+export interface AssetTablesRes {
+
+}
+
+async function queryAssetTables () {
+    try {
+//        const assetTables: Promise<AssetTablesRes> = <Promise<AssetTablesRes>>await API.graphql(graphqlOperation(listAssetTables));
+        const assetTables = await API.graphql(graphqlOperation(listAssetTables));
+        if (assetTables === undefined) return undefined;
+        console.log('queryAssetTables', assetTables);
+        return (await assetTables).data.listAssetTables.items;
+    } catch (err) {
+        console.log("Error: queryUploaders", err);
+    }
 }
 
 export interface OptionDataParams {
@@ -105,4 +121,4 @@ async function queryUploaders() {
     }
 }
 
-export { getApi, postApi, getOptionData, setOptionData, createOptionData, createCode, queryUploaders  };
+export { getApi, postApi, queryAssetTables, getOptionData, setOptionData, createOptionData, createCode, queryUploaders  };

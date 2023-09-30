@@ -1,6 +1,6 @@
 import "./App.css";
 import "@aws-amplify/ui-react/styles.css";
-import { getApi } from "./util";
+import { getApi, queryAssetTables } from "./util";
 import { Authenticator } from "@aws-amplify/ui-react";
 import NavBar from "./components/NavBar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -13,6 +13,7 @@ import { Auth } from "aws-amplify";
 
 function App() {
   const [username, setUsername] = useState("");
+  const [assetTables, setAssetTables] = useState([]);
 
   async function currentAuthenticatedUser() {
     try {
@@ -26,9 +27,21 @@ function App() {
   }
 
   useEffect(() => {
+    const getAssetTables = async () => {
+      const listTables = await queryAssetTables();
+      if (listTables) {
+        console.log("App: getAssetTables", listTables);
+        setAssetTables(listTables);
+      }
+    }
     currentAuthenticatedUser();
     getApi();
+    getAssetTables();
   }, []);
+
+  const deleteitem = () => {
+    console.log("App: delteitem called.");
+  }
 
   return (
     <>
@@ -46,7 +59,7 @@ function App() {
                 </div>
                 <div className="MainContent">
                   <Routes>
-                    <Route index path="/" element={<ListPage username={username}/>} />
+                    <Route index path="/" element={<ListPage username={username} assettables={assetTables} deleteitem={deleteitem}/>} />
                     <Route
                       path="/reader"
                       element={<ReaderPage username={username} />}
