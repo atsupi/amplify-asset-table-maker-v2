@@ -68,7 +68,15 @@
   "function": {
     "assettablemakerv2a7afbd9e": {
       "build": true,
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "assettablemakerv2"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }

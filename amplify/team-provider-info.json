@@ -18,7 +18,7 @@
       "function": {
         "assettablemakerv2a7afbd9e": {
           "deploymentBucketName": "amplify-assettablemakerv2-dev-24839-deployment",
-          "s3Key": "amplify-builds/assettablemakerv2a7afbd9e-47726d7573667831496c-build.zip"
+          "s3Key": "amplify-builds/assettablemakerv2a7afbd9e-35576d76772f45697564-build.zip"
         }
       },
       "api": {

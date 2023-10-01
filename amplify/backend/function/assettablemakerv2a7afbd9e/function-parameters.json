@@ -1,4 +1,12 @@
 {
   "lambdaLayers": [],
-  "permissions": {}
+  "permissions": {
+    "storage": {
+      "AssetTable:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ]
+    }
+  }
 }
