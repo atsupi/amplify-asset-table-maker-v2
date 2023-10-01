@@ -1,13 +1,7 @@
-import { useEffect, useState } from "react";
 import "./ListPage.css";
 import { AssetItem } from "../components/AssetItem";
 
 export default function ListPage(props: any) {
-  const [username, setUsername] = useState("");
-  useEffect(() => {
-    setUsername(props.username);
-  }, []);
-
   return (
     <div className="listPageContainer">
                 <table className="listPageTable">

@@ -6,14 +6,13 @@ export const UploadListItem = (params: any) => {
     <>
       {params && params.table
         ? params.table.map((item: any) => {
+          const keyname = "ulitr#"+ item.id;
             return (
-              <>
-                <tr key={item.id}>
+                <tr key={keyname}>
                   <td>{item.id}</td>
                   <td>{item.code}</td>
                   <td>{item.reportBy}</td>
-                </tr>{" "}
-              </>
+                </tr>
             );
           })
         : null}
