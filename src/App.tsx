@@ -1,6 +1,6 @@
 import "./App.css";
 import "@aws-amplify/ui-react/styles.css";
-import { getApi, queryAssetTables } from "./util";
+import { queryAssetTables } from "./util";
 import { Authenticator } from "@aws-amplify/ui-react";
 import NavBar from "./components/NavBar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -35,7 +35,6 @@ function App() {
       }
     }
     currentAuthenticatedUser();
-    getApi();
     getAssetTables();
   }, []);
 

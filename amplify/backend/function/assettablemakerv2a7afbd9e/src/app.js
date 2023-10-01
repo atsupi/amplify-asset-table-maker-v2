@@ -1,9 +1,9 @@
 /* Amplify Params - DO NOT EDIT
-	API_ASSETTABLEMAKERV2_ASSETTABLETABLE_ARN
-	API_ASSETTABLEMAKERV2_ASSETTABLETABLE_NAME
-	API_ASSETTABLEMAKERV2_GRAPHQLAPIIDOUTPUT
-	ENV
-	REGION
+  API_ASSETTABLEMAKERV2_ASSETTABLETABLE_ARN
+  API_ASSETTABLEMAKERV2_ASSETTABLETABLE_NAME
+  API_ASSETTABLEMAKERV2_GRAPHQLAPIIDOUTPUT
+  ENV
+  REGION
 Amplify Params - DO NOT EDIT */
 
 import { DynamoDBClient, PutItemCommand, GetItemCommand } from '@aws-sdk/client-dynamodb';
@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(awsServerlessExpressMiddleware.eventContext());
 
 // Enable CORS for all methods
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "*");
   next();
@@ -29,23 +29,23 @@ const config = {};
 const dbClient = new DynamoDBClient(config);
 const documentClient = DynamoDBDocumentClient.from(dbClient);
 
-const saveAssetData = async (key, date, reportBy, storage, facility, assetType, type) => { 
+const saveAssetData = async (key, date, reportBy, storage, facility, assetType, type) => {
   console.log("saveAssetData", process.env.API_ASSETTABLEMAKERV2_ASSETTABLETABLE_NAME);
   try {
     const id = new Date().getTime().toString();
     const command = new PutItemCommand({
       TableName: process.env.API_ASSETTABLEMAKERV2_ASSETTABLETABLE_NAME,
       Item: {
-        "id": { "S" : id },
-        "primaryKey": { "S" : key }, 
-        "reportBy": { "S" : reportBy }, 
-        "storage": { "S" : storage }, 
-        "facility": { "S" : facility }, 
-        "assetType": { "S" : assetType },
-        "date": { "S" : date }, 
-        "type": { "S" : "asset" }, 
-        "__typename": { "S" : "AssetTable" }, 
-        "owner": { "S" : reportBy }, 
+        "id": { "S": id },
+        "primaryKey": { "S": key },
+        "reportBy": { "S": reportBy },
+        "storage": { "S": storage },
+        "facility": { "S": facility },
+        "assetType": { "S": assetType },
+        "date": { "S": date },
+        "type": { "S": "asset" },
+        "__typename": { "S": "AssetTable" },
+        "owner": { "S": reportBy },
       },
     });
     const output = await dbClient.send(command);
@@ -57,14 +57,14 @@ const saveAssetData = async (key, date, reportBy, storage, facility, assetType, 
   return null;
 };
 
-const loadAssetData = async (id) => { 
+const loadAssetData = async (id) => {
   console.log("loadData", process.env.API_ASSETTABLEMAKERV2_ASSETTABLETABLE_NAME, id);
   if (id == null) return;
   try {
     const command = new GetItemCommand({
       TableName: process.env.API_ASSETTABLEMAKERV2_ASSETTABLETABLE_NAME,
       Key: {
-        "id": { "S" : id },
+        "id": { "S": id },
       },
     });
     const output = await dbClient.send(command);
@@ -75,49 +75,56 @@ const loadAssetData = async (id) => {
   }
 };
 
+function getDateString() {
+  const date = new Date();
+  const result = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+  return result;
+}
+
 /**********************
  * Example get method *
  **********************/
-app.get('/items', function(req, res) {
+app.get('/items', function (req, res) {
   // Add your code here
-  res.json({success: 'get call succeed!', url: req.url});
+  res.json({ success: 'get call succeed!', url: req.url });
 });
 
 /****************************
 * Example post method *
 ****************************/
-app.post('/items', async function(req, res, next) { 
+app.post('/items', async function (req, res, next) {
   const items = req.body.data;
   const option = req.body.option;
 
-  try {
+  const save = async (item, option) => {
     const id = await saveAssetData(
-      "SerialNo#205INZY5V237",
-      "2023/10/01",
-      "atsupi",
-      "B1F",
-      "Konwa",
-      "LGC2",
+      "SerialNo#" + item.code,
+      getDateString(),
+      option.reportBy,
+      option.storage,
+      option.facility,
+      option.assetType,
       "asset",
     );
-    if (id) {
-      const result = await loadAssetData(id);
-      console.log("app.post:", result.json());
-    }
+  };
+
+  console.log("app.post:", option);
+  try {
+    items.map((item) => {
+      console.log("app.post:", item);
+      save(item, option).then(()=> {
+        console.log("app.post:", item.code, 'save completed');
+      });
+    });
   } catch (error) {
     next(error);
   }
 
-  items.map((item) => {
-    console.log("app.post:", item);
-  });
-  console.log("app.post:", option);
-
-  res.json({success: 'post call succeed!', url: req.url, body: req.body});
+  res.json({ success: 'post call succeed!', url: req.url, body: req.body });
 });
 
-app.listen(3000, function() {
-    console.log("App started");
+app.listen(3000, function () {
+  console.log("App started");
 });
 
 // Export the app object. When executing the application local this does nothing. However,
