@@ -1,6 +1,6 @@
 import "./App.css";
 import "@aws-amplify/ui-react/styles.css";
-import { queryAssetTables } from "./util";
+import { AssetTablesData, queryAssetTables } from "./util";
 import { Authenticator } from "@aws-amplify/ui-react";
 import NavBar from "./components/NavBar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -13,7 +13,7 @@ import { Auth } from "aws-amplify";
 
 function App() {
   const [username, setUsername] = useState("");
-  const [assetTables, setAssetTables] = useState([]);
+  const [assetTables, setAssetTables] = useState(Array<AssetTablesData>);
 
   async function currentAuthenticatedUser() {
     try {
@@ -31,7 +31,7 @@ function App() {
       const listTables = await queryAssetTables();
       if (listTables) {
         console.log("App: getAssetTables", listTables);
-        setAssetTables(listTables);
+        setAssetTables(listTables || []); 
       }
     }
     currentAuthenticatedUser();

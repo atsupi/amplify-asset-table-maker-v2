@@ -8,10 +8,6 @@ import {
 import { useEffect, useState } from "react";
 import { UploadListItem } from "../components/UploadListItem";
 
-// interface queryUploadersRes {
-//   data: {items: []}
-// }
-
 export default function UploaderPage(props: any) {
   const [username, setUsername] = useState("");
   const [items, setItems] = useState<ListUploaderDataParamas>();

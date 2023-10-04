@@ -27,14 +27,24 @@ async function postApi(params: PostApiParams) {
     console.log("postApi", res);
 }
 
+export interface AssetTablesData {
+    id: string;
+    reportBy: string;
+    facility: string;
+    storage: string;
+    date: string;
+    primaryKey: string;
+    assetType: string;
+    type: string;
+}
+  
 export interface AssetTablesRes {
-
+  data: { listAssetTables: { items: Array<AssetTablesData>} }
 }
 
 async function queryAssetTables () {
     try {
-//        const assetTables: Promise<AssetTablesRes> = <Promise<AssetTablesRes>>await API.graphql(graphqlOperation(listAssetTables));
-        const assetTables = await API.graphql(graphqlOperation(listAssetTables));
+        const assetTables: Promise<AssetTablesRes> = <Promise<AssetTablesRes>>await API.graphql(graphqlOperation(listAssetTables));
         if (assetTables === undefined) return undefined;
         console.log('queryAssetTables', assetTables);
         return (await assetTables).data.listAssetTables.items;
