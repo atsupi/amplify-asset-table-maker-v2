@@ -23,6 +23,7 @@ export default function SettingPage(props: any) {
   const [facility, setFacility] = useState("");
   const [storage, setStorage] = useState("");
   const [assetType, setAssetType] = useState("");
+  const [inProgress, setInProgress] = useState(false);
   const key = "Owner#" + props.username;
 
   async function fetchSettingData() {
@@ -52,7 +53,8 @@ export default function SettingPage(props: any) {
     });
   }, [key]);
 
-  function handleSubmit(event: any) {
+  async function handleSubmit(event: any) {
+    setInProgress(true);
     event.preventDefault();
     const param: OptionDataParams = {
       id: key,
@@ -61,7 +63,8 @@ export default function SettingPage(props: any) {
       facility: event.target[2].value,
       assetType: event.target[3].value,
     };
-    setOptionData(param);
+    await setOptionData(param);
+    setInProgress(false);
   }
   return (
     <>
@@ -108,7 +111,7 @@ export default function SettingPage(props: any) {
             />
           </label>
           <br />
-          <button className="submitButton" type="submit">
+          <button className="submitButton" type="submit" disabled={inProgress}>
             Submit
           </button>
         </form>

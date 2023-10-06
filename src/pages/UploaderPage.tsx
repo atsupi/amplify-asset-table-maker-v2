@@ -13,6 +13,7 @@ import { API, graphqlOperation } from "aws-amplify";
 export default function UploaderPage(props: any) {
   const [username, setUsername] = useState("");
   const [items, setItems] = useState<ListUploaderDataParamas>();
+  const [inProgress, setInProgress] = useState(false);
 
   const data = async () => {
     const listUploaders = await queryUploaders();
@@ -44,6 +45,7 @@ export default function UploaderPage(props: any) {
   }
 
   const uploadData = async () => {
+    setInProgress(true);
     const res = await queryUploaders();
     const uploaders = res?.items;
 
@@ -54,12 +56,13 @@ export default function UploaderPage(props: any) {
       data: uploaders,
       option: option,
     };
-    postApi(param);
+    await postApi(param);
+    setInProgress(false);
   };
 
   return (
     <>
-      <button className="UploadButton" onClick={uploadData}>
+      <button className="UploadButton" onClick={uploadData} disabled={inProgress}>
         Upload data
       </button>
       <table id="uploadListTable">
