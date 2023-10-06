@@ -29,7 +29,7 @@ const config = {};
 const dbClient = new DynamoDBClient(config);
 const documentClient = DynamoDBDocumentClient.from(dbClient);
 
-const saveAssetData = async (key, date, reportBy, storage, facility, assetType, type) => {
+const saveAssetData = async (key, date, reportBy, storage, facility, assetType, type, owner) => {
   console.log("saveAssetData", process.env.API_ASSETTABLEMAKERV2_ASSETTABLETABLE_NAME);
   try {
     const id = new Date().getTime().toString();
@@ -45,7 +45,7 @@ const saveAssetData = async (key, date, reportBy, storage, facility, assetType, 
         "date": { "S": date },
         "type": { "S": "asset" },
         "__typename": { "S": "AssetTable" },
-        "owner": { "S": reportBy },
+        "owner": { "S": owner },
       },
     });
     const output = await dbClient.send(command);
@@ -105,6 +105,7 @@ app.post('/items', async function (req, res, next) {
       option.facility,
       option.assetType,
       "asset",
+      item.owner,
     );
   };
 

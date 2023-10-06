@@ -1,6 +1,6 @@
 import "./App.css";
 import "@aws-amplify/ui-react/styles.css";
-import { AssetTablesData, queryAssetTables } from "./util";
+import { AssetTablesData, queryAssetTables, removeAssetTable } from "./util";
 import { Authenticator } from "@aws-amplify/ui-react";
 import NavBar from "./components/NavBar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -26,20 +26,21 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    const getAssetTables = async () => {
-      const listTables = await queryAssetTables();
-      if (listTables) {
-        console.log("App: getAssetTables", listTables);
-        setAssetTables(listTables || []); 
-      }
+  const getAssetTables = async () => {
+    const listTables = await queryAssetTables();
+    if (listTables) {
+      setAssetTables(listTables || []); 
     }
+  }
+
+  useEffect(() => {
     currentAuthenticatedUser();
     getAssetTables();
   }, []);
 
-  const deleteitem = () => {
-    console.log("App: delteitem called.");
+  const deleteitem = async (item: any) => {
+    await removeAssetTable(item.id);
+    getAssetTables();
   }
 
   return (

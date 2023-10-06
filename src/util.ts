@@ -4,6 +4,7 @@ import { updateOption } from "./graphql/mutations";
 import { createOption } from "./graphql/mutations";
 import { listUploaders } from "./graphql/queries";
 import { createUploader } from "./graphql/mutations";
+import { deleteAssetTable } from "./graphql/mutations";
 
 const apiName = "apiasset";
 const path = "/items";
@@ -46,10 +47,17 @@ async function queryAssetTables () {
     try {
         const assetTables: Promise<AssetTablesRes> = <Promise<AssetTablesRes>>await API.graphql(graphqlOperation(listAssetTables));
         if (assetTables === undefined) return undefined;
-        console.log('queryAssetTables', assetTables);
         return (await assetTables).data.listAssetTables.items;
     } catch (err) {
-        console.log("Error: queryUploaders", err);
+        console.log("Error: queryAssetTables", err);
+    }
+}
+
+async function removeAssetTable (id: string) {
+    try {
+        await API.graphql(graphqlOperation(deleteAssetTable, {input: {id: id}}));
+    } catch (err) {
+        console.log("Error: deleteAssetTable", err);
     }
 }
 
@@ -131,4 +139,4 @@ async function queryUploaders() {
     }
 }
 
-export { getApi, postApi, queryAssetTables, getOptionData, setOptionData, createOptionData, createCode, queryUploaders  };
+export { getApi, postApi, queryAssetTables, removeAssetTable, getOptionData, setOptionData, createOptionData, createCode, queryUploaders  };
